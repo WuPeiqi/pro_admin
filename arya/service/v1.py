@@ -9,10 +9,6 @@ from django.utils import six
 
 
 class BaseAryaModal(object):
-    change_list_template = []
-
-    change_list_condition = {}
-
     def __init__(self, model_class, site):
         self.model_class = model_class
         self.app_label = model_class._meta.app_label
@@ -22,8 +18,10 @@ class BaseAryaModal(object):
 
     @property
     def changelist_url(self):
+        # redirect_url = "%s?%s" % (reverse('%s:%s_%s' % (self.site.namespace, self.app_label, self.model_name)),
+        #                           urllib.parse.urlencode(self.change_list_condition))
         redirect_url = "%s?%s" % (reverse('%s:%s_%s' % (self.site.namespace, self.app_label, self.model_name)),
-                                  urllib.parse.urlencode(self.change_list_condition))
+                                  self.change_list_condition.urlencode())
         return redirect_url
 
     def another_urls(self):
@@ -52,14 +50,54 @@ class BaseAryaModal(object):
     def urls(self):
         return self.get_urls()
 
+    # ########## CURD功能 ##########
+
+    # 定制列表页面模板
+    change_list_template = []
+
+    # 列表页面中默认的筛选条件
+    change_list_condition = {}
+
+
+    def get_model_field_name_list(self):
+        """
+        获取当前model中定义的字段
+        :return: 
+        """
+        # print(type(self.model_class._meta))
+        # from django.db.models.options import Options
+        return [item.name for item in self.model_class._meta.fields]
+
+    def get_all_model_field_name_list(self):
+        """
+        # 获取当前model中定义的字段（包括反向查找字段）
+        :return: 
+        """
+        return [ item.name for item in self.model_class._meta._get_fields()]
+
+
+    def get_change_list_condition(self):
+        field_list = self.get_all_model_field_name_list()
+        condition = {}
+        for k in self.change_list_condition:
+            if k not in field_list:
+                break
+            condition[k + "__in"] = self.change_list_condition.getlist(k)
+        return condition
+
     def changelist_view(self, request):
         """
         显示数据列表
         :param request: 
         :return: 
         """
+        self.change_list_condition = request.GET
+
+
+        result_list = self.model_class.objects.filter(**self.get_change_list_condition())
+
         context = {
-            'result_list': self.model_class.objects.all()
+            'result_list': result_list
         }
 
         return TemplateResponse(request, self.change_list_template or [
