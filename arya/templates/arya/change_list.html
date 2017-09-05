@@ -3,12 +3,29 @@
 
 
 {% block content %}
+
     <div class="container">
-        <div class="row">
-            <h1>数据列表</h1>
-            <!-- 根据list_display和result_list显示数据 -->
-            {% show_result_list cl %}
-        </div>
+        <h1>数据列表</h1>
+        <form method="post" class="form-horizontal">
+            {% csrf_token %}
+            <div class="row" style="padding: 5px 0">
+                {% if cl.actions %}
+                    {% show_action cl %}
+                {% endif %}
+                {{ cl.add_btn|safe }}
+            </div>
+            <div class="row">
+                <!-- 根据list_display和result_list显示数据 -->
+                {% show_result_list cl %}
+                <div style="text-align: right">
+                    <ul class="pagination" style="margin: 0;">
+                        {{ cl.pager.page_html|safe }}
+                    </ul>
+                </div>
+            </div>
+
+        </form>
+
     </div>
 {% endblock %}
 
@@ -16,11 +33,10 @@
     <script>
         $(function () {
             $('#headCheckBox').click(function () {
-                $(this).parent().parent().parent().next().find(':checkbox').prop('checked',$(this).prop('checked'));
+                $(this).parent().parent().parent().next().find(':checkbox').prop('checked', $(this).prop('checked'));
             })
 
         })
-
 
     </script>
 {% endblock %}

@@ -7,14 +7,30 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import six
 from django.utils.safestring import mark_safe
+from arya.utils.pagination import Page
 
 
 class ChangeList(object):
-    def __init__(self, arya_modal, list_display, result_list, model_cls):
+    def __init__(self, request, arya_modal, list_display, result_list, model_cls, actions):
+        self.request = request
         self.list_display = list_display
-        self.result_list = result_list
+
         self.model_cls = model_cls
         self.arya_modal = arya_modal
+        self.actions = actions
+
+        all_count = result_list.count()
+        query_params = {k: request.GET.get(k) for k in request.GET}
+
+        self.pager = Page(self.request.GET.get('page'), all_count, base_url=self.arya_modal.changelist_url(),
+                          query_params=query_params)
+        self.result_list = result_list[self.pager.start:self.pager.end]
+
+    def add_btn(self):
+        add_url = reverse(
+            '%s:%s_%s_add' % (self.arya_modal.site.namespace, self.arya_modal.app_label, self.arya_modal.model_name))
+        tpl = "<a class='btn btn-success' style='float:right' href='{0}'>新建数据</a>".format(add_url)
+        return mark_safe(tpl)
 
 
 class BaseAryaModal(object):
@@ -25,12 +41,16 @@ class BaseAryaModal(object):
 
         self.site = site
 
-    @property
-    def changelist_url(self):
+    def changelist_param_url(self, query_params):
         # redirect_url = "%s?%s" % (reverse('%s:%s_%s' % (self.site.namespace, self.app_label, self.model_name)),
         #                           urllib.parse.urlencode(self.change_list_condition))
-        redirect_url = "%s?%s" % (reverse('%s:%s_%s' % (self.site.namespace, self.app_label, self.model_name)),
-                                  self.change_list_condition.urlencode())
+        redirect_url = "%s?%s" % (
+            reverse('%s:%s_%s_changelist' % (self.site.namespace, self.app_label, self.model_name)),
+            query_params.urlencode())
+        return redirect_url
+
+    def changelist_url(self):
+        redirect_url = reverse('%s:%s_%s_changelist' % (self.site.namespace, self.app_label, self.model_name))
         return redirect_url
 
     def another_urls(self):
@@ -65,7 +85,6 @@ class BaseAryaModal(object):
     change_list_template = []
 
     """2. 定制列表中的筛选条件"""
-    change_list_condition = {}
 
     def get_model_field_name_list(self):
         """
@@ -83,23 +102,25 @@ class BaseAryaModal(object):
         """
         return [item.name for item in self.model_class._meta._get_fields()]
 
-    def get_change_list_condition(self):
+    def get_change_list_condition(self, query_params):
 
         field_list = self.get_all_model_field_name_list()
         condition = {}
-        for k in self.change_list_condition:
+        for k in query_params:
             if k not in field_list:
-                raise Exception('条件查询字段%s不合法，合法字段为：%s' % (k, ",".join(field_list)))
-            condition[k + "__in"] = self.change_list_condition.getlist(k)
+                # raise Exception('条件查询字段%s不合法，合法字段为：%s' % (k, ",".join(field_list)))
+                continue
+            condition[k + "__in"] = query_params.getlist(k)
         return condition
 
     """3. 定制数据列表开始"""
+
     def checkbox_field(self, obj=None, is_header=False):
         if is_header:
             tpl = "<input type='checkbox' id='headCheckBox' />"
             return mark_safe(tpl)
         else:
-            tpl = "<input type='checkbox' value='{0}' />".format(obj.pk)
+            tpl = "<input type='checkbox' name='pk' value='{0}' />".format(obj.pk)
             return mark_safe(tpl)
 
     def custom_field(self, obj=None, is_header=False):
@@ -115,13 +136,30 @@ class BaseAryaModal(object):
             edit_url = reverse('{0}:{1}_{2}_change'.format(self.site.namespace, self.app_label, self.model_name),
                                args=(obj.pk,))
             tpl = "<a href='{0}'>编辑</a>".format(edit_url)
-            print(tpl)
             return mark_safe(tpl)
 
     # 页面上显示的字段
     list_display = (checkbox_field, 'username', 'pwd', 'fk', custom_field, edit_field)
 
+    """4. 定制Action行为"""
+
+    def delete_action(self, request, queryset):
+        """
+        定制Action行为
+        :param request: 
+        :param queryset: 
+        :return: True表示保留所有条件,False表示回到列表页面
+        """
+        pk_list = request.POST.getlist('pk')
+        queryset.filter(id__in=pk_list).delete()
+
+        return True
+
+    delete_action.short_description = "删除选择项"
+    actions = [delete_action, ]
+
     """增删改查方法"""
+
     def changelist_view(self, request):
         """
         显示数据列表
@@ -135,11 +173,19 @@ class BaseAryaModal(object):
         :return: 
         """
 
-        self.change_list_condition = request.GET
+        result_list = self.model_class.objects.filter(**self.get_change_list_condition(request.GET))
 
-        result_list = self.model_class.objects.filter(**self.get_change_list_condition())
+        if request.method == "POST":
+            """执行Action行为"""
+            action = request.POST.get('action')
+            if not action:
+                return redirect(self.changelist_param_url(request.GET))
+            if getattr(self, action)(request, result_list):
+                return redirect(self.changelist_param_url(request.GET))
+            else:
+                return redirect(self.changelist_url())
 
-        change_list = ChangeList(self, self.list_display, result_list, self.model_class)
+        change_list = ChangeList(request, self, self.list_display, result_list, self.model_class, actions=self.actions)
         context = {
             'cl': change_list,
 
@@ -170,8 +216,7 @@ class BaseAryaModal(object):
         :return: 
         """
         # 获取列表URL + 获取之前的保存筛选条件
-
-        return redirect(self.changelist_url)
+        return redirect(self.changelist_param_url(request.GET))
 
     def change_view(self, request, pk):
         """
@@ -189,7 +234,7 @@ class BaseAryaModal(object):
         elif request.method == 'POST':
 
             # 如果修改成功，则跳转回去原来筛选页面
-            return redirect(self.changelist_url)
+            return redirect(self.changelist_url())
 
         else:
             raise Exception('当前URL只支持GET/POST方法')

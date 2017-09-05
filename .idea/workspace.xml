@@ -2,16 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="267764a2-3469-4853-81fa-3281186344bc" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/arya/templatetags/arya_list.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/dataSources/b573a8c3-28fc-4500-989d-02779e9f2b27.xml" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources/349d531a-4e8f-49f3-a49c-cb896f9ed1fe.xml" afterPath="$PROJECT_DIR$/.idea/dataSources/349d531a-4e8f-49f3-a49c-cb896f9ed1fe.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app01/models.py" afterPath="$PROJECT_DIR$/app01/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arya/service/v1.py" afterPath="$PROJECT_DIR$/arya/service/v1.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arya/templates/arya/change_list.html" afterPath="$PROJECT_DIR$/arya/templates/arya/change_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arya/templates/arya/layout.html" afterPath="$PROJECT_DIR$/arya/templates/arya/layout.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pro_admin/settings.py" afterPath="$PROJECT_DIR$/pro_admin/settings.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arya/templatetags/arya_list.py" afterPath="$PROJECT_DIR$/arya/templatetags/arya_list.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -63,28 +58,72 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="v1.py" pinned="false" current-in-tab="false">
+      <file leaf-file-name="v1.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/arya/service/v1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="378">
-              <caret line="98" column="58" lean-forward="false" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="58" />
+            <state relative-caret-position="326">
+              <caret line="31" column="40" lean-forward="false" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
               <folding>
                 <element signature="e#45#64#0" expanded="true" />
-                <element signature="e#1299#1375#0" expanded="false" />
-                <element signature="e#2179#2201#0" expanded="false" />
-                <element signature="e#2402#2629#0" expanded="false" />
-                <element signature="e#2684#2829#0" expanded="false" />
-                <element signature="e#2881#3217#0" expanded="false" />
-                <element signature="e#3603#3690#0" expanded="false" />
-                <element signature="e#3753#4086#0" expanded="false" />
-                <element signature="e#5014#5316#0" expanded="false" />
-                <element signature="e#5366#5533#0" expanded="false" />
-                <element signature="e#5583#6157#0" expanded="false" />
-                <element signature="e#6516#7039#0" expanded="false" />
-                <element signature="e#7083#7253#0" expanded="false" />
-                <element signature="e#7293#7377#0" expanded="false" />
-                <element signature="e#7418#7502#0" expanded="false" />
-                <element signature="e#7542#7624#0" expanded="false" />
+                <element signature="e#1313#7853#0" expanded="false" />
+                <element signature="e#1360#1524#0" expanded="false" />
+                <element signature="e#2187#2263#0" expanded="false" />
+                <element signature="e#3259#3486#0" expanded="false" />
+                <element signature="e#3541#3686#0" expanded="false" />
+                <element signature="e#3752#4087#0" expanded="false" />
+                <element signature="e#4177#4419#0" expanded="false" />
+                <element signature="e#4484#4571#0" expanded="false" />
+                <element signature="e#4634#4944#0" expanded="false" />
+                <element signature="e#5124#5368#0" expanded="false" />
+                <element signature="e#5832#6200#0" expanded="false" />
+                <element signature="e#6690#6992#0" expanded="false" />
+                <element signature="e#7042#7227#0" expanded="false" />
+                <element signature="e#7277#7853#0" expanded="false" />
+                <element signature="e#8212#8735#0" expanded="false" />
+                <element signature="e#8779#8949#0" expanded="false" />
+                <element signature="e#8989#9073#0" expanded="false" />
+                <element signature="e#9114#9198#0" expanded="false" />
+                <element signature="e#9238#9320#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pagination.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/arya/utils/pagination.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="343">
+              <caret line="84" column="45" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
+              <folding>
+                <element signature="e#1559#2218#0" expanded="false" />
+                <element signature="e#2403#2548#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="change_list.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="210">
+              <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+              <folding>
+                <element signature="e#573#598#0#HTML" expanded="true" />
+                <element signature="e#568#765#0#HTML" expanded="false" />
+                <element signature="e#643#661#0#HTML" expanded="true" />
+                <element signature="e#849#1092#0#HTML" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="arya_list.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/arya/templatetags/arya_list.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="329">
+              <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+              <folding>
+                <element signature="e#262#630#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -95,64 +134,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="15">
               <caret line="1" column="7" lean-forward="false" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="layout.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/arya/templates/arya/layout.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="195">
-              <caret line="13" column="30" lean-forward="false" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="change_list.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="arya_list.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/arya/templatetags/arya_list.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="7" lean-forward="true" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-              <folding>
-                <element signature="e#45#80#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="base.py" pinned="false" current-in-tab="false">
-        <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/db/models/base.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-28">
-              <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
-              <folding>
-                <element signature="e#2622#12863#0" expanded="false" />
-                <element signature="e#12913#13161#0" expanded="false" />
-                <element signature="e#13194#15005#0" expanded="false" />
-                <element signature="e#15090#18928#0" expanded="false" />
-                <element signature="e#19129#19535#0" expanded="false" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app01/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="165">
-              <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
               <folding />
             </state>
           </provider>
@@ -181,6 +162,8 @@
       <find>Template</find>
       <find>fields</find>
       <find>reverse</find>
+      <find>print</find>
+      <find>changelist_url</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -213,10 +196,12 @@
         <option value="$PROJECT_DIR$/pro_admin/settings.py" />
         <option value="$PROJECT_DIR$/arya/templates/arya/change_list_results.html" />
         <option value="$PROJECT_DIR$/app01/models.py" />
-        <option value="$PROJECT_DIR$/arya/templatetags/arya_list.py" />
-        <option value="$PROJECT_DIR$/arya/service/v1.py" />
         <option value="$PROJECT_DIR$/arya/templates/arya/layout.html" />
+        <option value="$PROJECT_DIR$/arya/templatetags/arya_list.py" />
+        <option value="$PROJECT_DIR$/arya/utils/pagination.py" />
+        <option value="$PROJECT_DIR$/arya/templates/arya/change_list_action.html" />
         <option value="$PROJECT_DIR$/arya/templates/arya/change_list.html" />
+        <option value="$PROJECT_DIR$/arya/service/v1.py" />
       </list>
     </option>
   </component>
@@ -227,8 +212,8 @@
     <sorting>DEFINITION_ORDER</sorting>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1920" />
-    <option name="height" value="1080" />
+    <option name="width" value="1280" />
+    <option name="height" value="800" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="1" id="Add" />
@@ -596,6 +581,60 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pro_admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pro_admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="arya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pro_admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pro_admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="arya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templatetags" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pro_admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pro_admin" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="arya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="templates" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="arya" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="Scope" />
@@ -623,17 +662,17 @@
     <option name="SHOW_DIALOG" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/arya/static/js" />
-      <recent name="$PROJECT_DIR$/arya/static/plugins" />
-      <recent name="$PROJECT_DIR$/arya/templates/arya" />
-      <recent name="$PROJECT_DIR$/backend/static/backend/js" />
-      <recent name="$PROJECT_DIR$/backend/static/backend/plugins" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/arya/static/arya" />
       <recent name="$PROJECT_DIR$/arya/static" />
       <recent name="$PROJECT_DIR$/arya" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/arya/utils" />
+      <recent name="$PROJECT_DIR$/arya/static/js" />
+      <recent name="$PROJECT_DIR$/arya/static/plugins" />
+      <recent name="$PROJECT_DIR$/arya/templates/arya" />
+      <recent name="$PROJECT_DIR$/backend/static/backend/js" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -908,13 +947,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1920" height="1080" extended-state="0" />
+    <frame x="0" y="0" width="1280" height="800" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15335463" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2197092" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1943557" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.30691057" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.19386107" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.22443181" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -952,21 +992,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/shortcuts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="24" column="4" lean-forward="false" selection-start-line="24" selection-start-column="4" selection-end-line="24" selection-end-column="4" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/template/loader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="297">
-          <caret line="27" column="45" lean-forward="false" selection-start-line="27" selection-start-column="40" selection-end-line="27" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/utils/six.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -1081,29 +1106,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/backend/service/v1.py" />
     <entry file="file://$PROJECT_DIR$/backend/templates/backend/layout.html" />
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/http/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="479" column="17" lean-forward="false" selection-start-line="479" selection-start-column="8" selection-end-line="479" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/db/models/options.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4110">
           <caret line="563" column="33" lean-forward="false" selection-start-line="563" selection-start-column="22" selection-end-line="563" selection-end-column="33" />
-          <folding>
-            <element signature="e#5753#8334#0" expanded="false" />
-            <element signature="e#8375#10244#0" expanded="false" />
-            <element signature="e#10433#12194#0" expanded="false" />
-            <element signature="e#13838#14849#0" expanded="false" />
-            <element signature="e#14904#15558#0" expanded="false" />
-            <element signature="e#15745#17545#0" expanded="false" />
-            <element signature="e#17607#18411#0" expanded="false" />
-            <element signature="e#20670#21066#0" expanded="false" />
-            <element signature="e#21125#21574#0" expanded="false" />
-            <element signature="e#21636#22290#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1111,7 +1117,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="902">
           <caret line="218" column="31" lean-forward="false" selection-start-line="218" selection-start-column="31" selection-end-line="218" selection-end-column="31" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1127,9 +1132,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="902">
           <caret line="1848" column="8" lean-forward="false" selection-start-line="1848" selection-start-column="8" selection-end-line="1848" selection-end-column="8" />
-          <folding>
-            <element signature="e#350#361#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1165,9 +1167,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#0#27#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1183,18 +1182,10 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="30" lean-forward="false" selection-start-line="0" selection-start-column="30" selection-end-line="0" selection-end-column="30" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app02/admin.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="11" lean-forward="false" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/app02/admin.py" />
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/contrib/admin/templatetags/admin_list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="244">
@@ -1214,7 +1205,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="420">
           <caret line="81" column="24" lean-forward="false" selection-start-line="81" selection-start-column="13" selection-end-line="81" selection-end-column="24" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1222,7 +1212,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1579,7 +1568,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1600,7 +1588,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1613,7 +1600,6 @@
       <provider editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1621,20 +1607,18 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="dbDummy://dbtable:/8ac7959f/349d531a-4e8f-49f3-a49c-cb896f9ed1fe/main.app01_userinfo">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
         <state>
           <filtering enabled="true" />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
       </provider>
     </entry>
@@ -1650,23 +1634,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="225">
           <caret line="91" column="23" lean-forward="false" selection-start-line="91" selection-start-column="13" selection-end-line="91" selection-end-column="23" />
-          <folding>
-            <element signature="e#2854#3942#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/db/models/base.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-28">
-          <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
-          <folding>
-            <element signature="e#2622#12863#0" expanded="false" />
-            <element signature="e#12913#13161#0" expanded="false" />
-            <element signature="e#13194#15005#0" expanded="false" />
-            <element signature="e#15090#18928#0" expanded="false" />
-            <element signature="e#19129#19535#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1674,57 +1641,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1845">
           <caret line="123" column="36" lean-forward="false" selection-start-line="123" selection-start-column="36" selection-end-line="123" selection-end-column="36" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app01/models.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/arya/templatetags/arya_list.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="7" lean-forward="true" selection-start-line="22" selection-start-column="7" selection-end-line="22" selection-end-column="7" />
-          <folding>
-            <element signature="e#45#80#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/arya/service/v1.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="378">
-          <caret line="98" column="58" lean-forward="false" selection-start-line="98" selection-start-column="46" selection-end-line="98" selection-end-column="58" />
-          <folding>
-            <element signature="e#45#64#0" expanded="true" />
-            <element signature="e#1299#1375#0" expanded="false" />
-            <element signature="e#2179#2201#0" expanded="false" />
-            <element signature="e#2402#2629#0" expanded="false" />
-            <element signature="e#2684#2829#0" expanded="false" />
-            <element signature="e#2881#3217#0" expanded="false" />
-            <element signature="e#3603#3690#0" expanded="false" />
-            <element signature="e#3753#4086#0" expanded="false" />
-            <element signature="e#5014#5316#0" expanded="false" />
-            <element signature="e#5366#5533#0" expanded="false" />
-            <element signature="e#5583#6157#0" expanded="false" />
-            <element signature="e#6516#7039#0" expanded="false" />
-            <element signature="e#7083#7253#0" expanded="false" />
-            <element signature="e#7293#7377#0" expanded="false" />
-            <element signature="e#7418#7502#0" expanded="false" />
-            <element signature="e#7542#7624#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list_results.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="15">
-          <caret line="1" column="7" lean-forward="false" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
           <folding />
         </state>
       </provider>
@@ -1737,11 +1653,112 @@
         </state>
       </provider>
     </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/db/models/base.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="312" column="0" lean-forward="false" selection-start-line="312" selection-start-column="0" selection-end-line="312" selection-end-column="0" />
+          <folding>
+            <element signature="e#2622#12863#0" expanded="false" />
+            <element signature="e#12913#13161#0" expanded="false" />
+            <element signature="e#13194#15005#0" expanded="false" />
+            <element signature="e#15090#18928#0" expanded="false" />
+            <element signature="e#19129#19535#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app01/models.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="49" lean-forward="false" selection-start-line="11" selection-start-column="49" selection-end-line="11" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/http/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="346">
+          <caret line="402" column="21" lean-forward="false" selection-start-line="402" selection-start-column="13" selection-end-line="402" selection-end-column="21" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list_action.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" column="0" lean-forward="true" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list_results.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="7" lean-forward="false" selection-start-line="1" selection-start-column="7" selection-end-line="1" selection-end-column="7" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="14" lean-forward="true" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
-          <folding />
+        <state relative-caret-position="210">
+          <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+          <folding>
+            <element signature="e#573#598#0#HTML" expanded="true" />
+            <element signature="e#568#765#0#HTML" expanded="false" />
+            <element signature="e#643#661#0#HTML" expanded="true" />
+            <element signature="e#849#1092#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arya/templatetags/arya_list.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="51" column="0" lean-forward="true" selection-start-line="51" selection-start-column="0" selection-end-line="51" selection-end-column="0" />
+          <folding>
+            <element signature="e#262#630#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arya/utils/pagination.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="343">
+          <caret line="84" column="45" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
+          <folding>
+            <element signature="e#1559#2218#0" expanded="false" />
+            <element signature="e#2403#2548#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arya/service/v1.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="326">
+          <caret line="31" column="40" lean-forward="false" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+          <folding>
+            <element signature="e#45#64#0" expanded="true" />
+            <element signature="e#1313#7853#0" expanded="false" />
+            <element signature="e#1360#1524#0" expanded="false" />
+            <element signature="e#2187#2263#0" expanded="false" />
+            <element signature="e#3259#3486#0" expanded="false" />
+            <element signature="e#3541#3686#0" expanded="false" />
+            <element signature="e#3752#4087#0" expanded="false" />
+            <element signature="e#4177#4419#0" expanded="false" />
+            <element signature="e#4484#4571#0" expanded="false" />
+            <element signature="e#4634#4944#0" expanded="false" />
+            <element signature="e#5124#5368#0" expanded="false" />
+            <element signature="e#5832#6200#0" expanded="false" />
+            <element signature="e#6690#6992#0" expanded="false" />
+            <element signature="e#7042#7227#0" expanded="false" />
+            <element signature="e#7277#7853#0" expanded="false" />
+            <element signature="e#8212#8735#0" expanded="false" />
+            <element signature="e#8779#8949#0" expanded="false" />
+            <element signature="e#8989#9073#0" expanded="false" />
+            <element signature="e#9114#9198#0" expanded="false" />
+            <element signature="e#9238#9320#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
