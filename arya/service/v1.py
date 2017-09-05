@@ -7,7 +7,13 @@ from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import six
 from django.utils.safestring import mark_safe
+from django.http.request import QueryDict
+from django.forms import Form
+from django.forms import fields
+from django.forms import widgets
 from arya.utils.pagination import Page
+
+import copy
 
 
 class ChangeList(object):
@@ -20,17 +26,45 @@ class ChangeList(object):
         self.actions = actions
 
         all_count = result_list.count()
-        query_params = {k: request.GET.get(k) for k in request.GET}
+        query_params = copy.copy(request.GET)
+        query_params._mutable = True
 
         self.pager = Page(self.request.GET.get('page'), all_count, base_url=self.arya_modal.changelist_url(),
                           query_params=query_params)
         self.result_list = result_list[self.pager.start:self.pager.end]
 
     def add_btn(self):
+        """
+        列表页面定制新建数据按钮
+        :return: 
+        """
         add_url = reverse(
             '%s:%s_%s_add' % (self.arya_modal.site.namespace, self.arya_modal.app_label, self.arya_modal.model_name))
-        tpl = "<a class='btn btn-success' style='float:right' href='{0}'>新建数据</a>".format(add_url)
+
+        _change = QueryDict(mutable=True)
+        _change['_change_filter'] = self.request.GET.urlencode()
+
+        tpl = "<a class='btn btn-success' style='float:right' href='{0}?{1}'>新建数据</a>".format(add_url,
+                                                                                              _change.urlencode())
         return mark_safe(tpl)
+
+
+class PageForm(Form):
+    user = fields.CharField(
+        label='用户名',
+        label_suffix=':',
+        widget=widgets.TextInput(attrs={'class': 'form-control'})
+    )
+    pwd = fields.CharField(
+        label='密码',
+        label_suffix=':',
+        widget=widgets.TextInput(attrs={'class': 'form-control'})
+    )
+    email = fields.EmailField(
+        label='邮箱',
+        label_suffix=':',
+        widget=widgets.TextInput(attrs={'class': 'form-control'})
+    )
 
 
 class BaseAryaModal(object):
@@ -158,6 +192,9 @@ class BaseAryaModal(object):
     delete_action.short_description = "删除选择项"
     actions = [delete_action, ]
 
+    """5. 定制添加和编辑页面中的Form组件"""
+    page_form = PageForm
+
     """增删改查方法"""
 
     def changelist_view(self, request):
@@ -202,11 +239,32 @@ class BaseAryaModal(object):
         :param request: 
         :return: 
         """
+        from django.forms.boundfield import BoundField
+        print(request.GET)
+        if request.method == 'GET':
+            # 创建Form表单
+            form = self.page_form()
+        else:
+            form = self.page_form(data=request.POST, files=request.FILES)
+            if form.is_valid():
+                print(form.cleaned_data)
+                # self.model_class.objects.create(**form.cleaned_data)
+                _change_filter = request.GET.get('_change_filter')
+                if _change_filter:
+                    change_list_url = "{0}?{1}".format(self.changelist_url(), _change_filter)
+                else:
+                    change_list_url = self.changelist_url()
+                return redirect(change_list_url)
+            else:
+                print(form.errors)
+        context = {
+            'form': form
+        }
         return TemplateResponse(request, self.change_list_template or [
             'arya/%s/%s/add.html' % (self.app_label, self.model_name),
             'arya/%s/add.html' % self.app_label,
             'arya/add.html'
-        ])
+        ], context)
 
     def delete_view(self, request, pk):
         """

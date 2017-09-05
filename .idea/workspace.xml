@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="267764a2-3469-4853-81fa-3281186344bc" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/db.sqlite3" afterPath="$PROJECT_DIR$/db.sqlite3" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arya/service/v1.py" afterPath="$PROJECT_DIR$/arya/service/v1.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arya/templates/arya/add.html" afterPath="$PROJECT_DIR$/arya/templates/arya/add.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arya/templates/arya/change_list.html" afterPath="$PROJECT_DIR$/arya/templates/arya/change_list.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arya/templatetags/arya_list.py" afterPath="$PROJECT_DIR$/arya/templatetags/arya_list.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/arya/utils/pagination.py" afterPath="$PROJECT_DIR$/arya/utils/pagination.py" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -61,43 +61,55 @@
       <file leaf-file-name="v1.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/arya/service/v1.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="326">
-              <caret line="31" column="40" lean-forward="false" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+            <state relative-caret-position="359">
+              <caret line="259" column="19" lean-forward="false" selection-start-line="259" selection-start-column="19" selection-end-line="259" selection-end-column="19" />
               <folding>
                 <element signature="e#45#64#0" expanded="true" />
-                <element signature="e#1313#7853#0" expanded="false" />
-                <element signature="e#1360#1524#0" expanded="false" />
-                <element signature="e#2187#2263#0" expanded="false" />
-                <element signature="e#3259#3486#0" expanded="false" />
-                <element signature="e#3541#3686#0" expanded="false" />
-                <element signature="e#3752#4087#0" expanded="false" />
-                <element signature="e#4177#4419#0" expanded="false" />
-                <element signature="e#4484#4571#0" expanded="false" />
-                <element signature="e#4634#4944#0" expanded="false" />
-                <element signature="e#5124#5368#0" expanded="false" />
-                <element signature="e#5832#6200#0" expanded="false" />
-                <element signature="e#6690#6992#0" expanded="false" />
-                <element signature="e#7042#7227#0" expanded="false" />
-                <element signature="e#7277#7853#0" expanded="false" />
-                <element signature="e#8212#8735#0" expanded="false" />
-                <element signature="e#8779#8949#0" expanded="false" />
-                <element signature="e#8989#9073#0" expanded="false" />
-                <element signature="e#9114#9198#0" expanded="false" />
-                <element signature="e#9238#9320#0" expanded="false" />
+                <element signature="e#521#1733#0" expanded="false" />
+                <element signature="e#2283#2447#0" expanded="false" />
+                <element signature="e#2507#2902#0" expanded="false" />
+                <element signature="e#3110#3186#0" expanded="false" />
+                <element signature="e#3220#3946#0" expanded="false" />
+                <element signature="e#4182#4409#0" expanded="false" />
+                <element signature="e#4464#4609#0" expanded="false" />
+                <element signature="e#4675#5010#0" expanded="false" />
+                <element signature="e#5100#5342#0" expanded="false" />
+                <element signature="e#5407#5494#0" expanded="false" />
+                <element signature="e#5557#5867#0" expanded="false" />
+                <element signature="e#6047#6291#0" expanded="false" />
+                <element signature="e#6495#7627#0" expanded="false" />
+                <element signature="e#6812#7180#0" expanded="false" />
+                <element signature="e#8875#9060#0" expanded="false" />
+                <element signature="e#9110#9686#0" expanded="false" />
+                <element signature="e#9717#11153#0" expanded="false" />
+                <element signature="e#9780#9867#0" expanded="false" />
+                <element signature="e#9946#10011#0" expanded="false" />
+                <element signature="e#10045#10568#0" expanded="false" />
+                <element signature="e#10612#10782#0" expanded="false" />
+                <element signature="e#10822#10906#0" expanded="false" />
+                <element signature="e#10947#11031#0" expanded="false" />
+                <element signature="e#11071#11153#0" expanded="false" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pagination.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/arya/utils/pagination.py">
+      <file leaf-file-name="fields.py" pinned="false" current-in-tab="false">
+        <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/forms/fields.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="343">
-              <caret line="84" column="45" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
-              <folding>
-                <element signature="e#1559#2218#0" expanded="false" />
-                <element signature="e#2403#2548#0" expanded="false" />
-              </folding>
+            <state relative-caret-position="304">
+              <caret line="64" column="76" lean-forward="false" selection-start-line="64" selection-start-column="64" selection-end-line="64" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="request.py" pinned="false" current-in-tab="false">
+        <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/http/request.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="164">
+              <caret line="373" column="49" lean-forward="false" selection-start-line="373" selection-start-column="42" selection-end-line="373" selection-end-column="49" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -105,14 +117,24 @@
       <file leaf-file-name="change_list.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="210">
-              <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
+            <state relative-caret-position="60">
+              <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="19" />
               <folding>
-                <element signature="e#573#598#0#HTML" expanded="true" />
-                <element signature="e#568#765#0#HTML" expanded="false" />
-                <element signature="e#643#661#0#HTML" expanded="true" />
-                <element signature="e#849#1092#0#HTML" expanded="false" />
+                <element signature="e#611#636#0#HTML" expanded="true" />
+                <element signature="e#606#803#0#HTML" expanded="false" />
+                <element signature="e#681#699#0#HTML" expanded="true" />
+                <element signature="e#887#1130#0#HTML" expanded="false" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="add.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/arya/templates/arya/add.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="345">
+              <caret line="23" column="76" lean-forward="false" selection-start-line="23" selection-start-column="76" selection-end-line="23" selection-end-column="76" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -164,6 +186,7 @@
       <find>reverse</find>
       <find>print</find>
       <find>changelist_url</find>
+      <find>from</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -198,9 +221,10 @@
         <option value="$PROJECT_DIR$/app01/models.py" />
         <option value="$PROJECT_DIR$/arya/templates/arya/layout.html" />
         <option value="$PROJECT_DIR$/arya/templatetags/arya_list.py" />
-        <option value="$PROJECT_DIR$/arya/utils/pagination.py" />
         <option value="$PROJECT_DIR$/arya/templates/arya/change_list_action.html" />
+        <option value="$PROJECT_DIR$/arya/utils/pagination.py" />
         <option value="$PROJECT_DIR$/arya/templates/arya/change_list.html" />
+        <option value="$PROJECT_DIR$/arya/templates/arya/add.html" />
         <option value="$PROJECT_DIR$/arya/service/v1.py" />
       </list>
     </option>
@@ -992,27 +1016,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/utils/six.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="48" column="4" lean-forward="false" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/contrib/admin/decorators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="4" lean-forward="false" selection-start-line="0" selection-start-column="4" selection-end-line="0" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/manage.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="0">
-          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/apps/config.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="177">
@@ -1675,14 +1678,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/http/request.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="402" column="21" lean-forward="false" selection-start-line="402" selection-start-column="13" selection-end-line="402" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list_action.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -1699,19 +1694,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="210">
-          <caret line="14" column="34" lean-forward="false" selection-start-line="14" selection-start-column="34" selection-end-line="14" selection-end-column="34" />
-          <folding>
-            <element signature="e#573#598#0#HTML" expanded="true" />
-            <element signature="e#568#765#0#HTML" expanded="false" />
-            <element signature="e#643#661#0#HTML" expanded="true" />
-            <element signature="e#849#1092#0#HTML" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/arya/templatetags/arya_list.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="329">
@@ -1724,40 +1706,89 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/arya/utils/pagination.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="343">
-          <caret line="84" column="45" lean-forward="false" selection-start-line="84" selection-start-column="45" selection-end-line="84" selection-end-column="45" />
+        <state relative-caret-position="1200">
+          <caret line="93" column="100" lean-forward="false" selection-start-line="93" selection-start-column="100" selection-end-line="93" selection-end-column="100" />
           <folding>
             <element signature="e#1559#2218#0" expanded="false" />
-            <element signature="e#2403#2548#0" expanded="false" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/http/request.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="164">
+          <caret line="373" column="49" lean-forward="false" selection-start-line="373" selection-start-column="42" selection-end-line="373" selection-end-column="49" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/forms/boundfield.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="24" column="34" lean-forward="false" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file:///Library/Frameworks/Python.framework/Versions/3.5/lib/python3.5/site-packages/django/forms/fields.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="64" column="76" lean-forward="false" selection-start-line="64" selection-start-column="64" selection-end-line="64" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arya/templates/arya/change_list.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="60">
+          <caret line="4" column="0" lean-forward="false" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="19" />
+          <folding>
+            <element signature="e#611#636#0#HTML" expanded="true" />
+            <element signature="e#606#803#0#HTML" expanded="false" />
+            <element signature="e#681#699#0#HTML" expanded="true" />
+            <element signature="e#887#1130#0#HTML" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/arya/templates/arya/add.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="345">
+          <caret line="23" column="76" lean-forward="false" selection-start-line="23" selection-start-column="76" selection-end-line="23" selection-end-column="76" />
+          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/arya/service/v1.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="326">
-          <caret line="31" column="40" lean-forward="false" selection-start-line="31" selection-start-column="40" selection-end-line="31" selection-end-column="40" />
+        <state relative-caret-position="359">
+          <caret line="259" column="19" lean-forward="false" selection-start-line="259" selection-start-column="19" selection-end-line="259" selection-end-column="19" />
           <folding>
             <element signature="e#45#64#0" expanded="true" />
-            <element signature="e#1313#7853#0" expanded="false" />
-            <element signature="e#1360#1524#0" expanded="false" />
-            <element signature="e#2187#2263#0" expanded="false" />
-            <element signature="e#3259#3486#0" expanded="false" />
-            <element signature="e#3541#3686#0" expanded="false" />
-            <element signature="e#3752#4087#0" expanded="false" />
-            <element signature="e#4177#4419#0" expanded="false" />
-            <element signature="e#4484#4571#0" expanded="false" />
-            <element signature="e#4634#4944#0" expanded="false" />
-            <element signature="e#5124#5368#0" expanded="false" />
-            <element signature="e#5832#6200#0" expanded="false" />
-            <element signature="e#6690#6992#0" expanded="false" />
-            <element signature="e#7042#7227#0" expanded="false" />
-            <element signature="e#7277#7853#0" expanded="false" />
-            <element signature="e#8212#8735#0" expanded="false" />
-            <element signature="e#8779#8949#0" expanded="false" />
-            <element signature="e#8989#9073#0" expanded="false" />
-            <element signature="e#9114#9198#0" expanded="false" />
-            <element signature="e#9238#9320#0" expanded="false" />
+            <element signature="e#521#1733#0" expanded="false" />
+            <element signature="e#2283#2447#0" expanded="false" />
+            <element signature="e#2507#2902#0" expanded="false" />
+            <element signature="e#3110#3186#0" expanded="false" />
+            <element signature="e#3220#3946#0" expanded="false" />
+            <element signature="e#4182#4409#0" expanded="false" />
+            <element signature="e#4464#4609#0" expanded="false" />
+            <element signature="e#4675#5010#0" expanded="false" />
+            <element signature="e#5100#5342#0" expanded="false" />
+            <element signature="e#5407#5494#0" expanded="false" />
+            <element signature="e#5557#5867#0" expanded="false" />
+            <element signature="e#6047#6291#0" expanded="false" />
+            <element signature="e#6495#7627#0" expanded="false" />
+            <element signature="e#6812#7180#0" expanded="false" />
+            <element signature="e#8875#9060#0" expanded="false" />
+            <element signature="e#9110#9686#0" expanded="false" />
+            <element signature="e#9717#11153#0" expanded="false" />
+            <element signature="e#9780#9867#0" expanded="false" />
+            <element signature="e#9946#10011#0" expanded="false" />
+            <element signature="e#10045#10568#0" expanded="false" />
+            <element signature="e#10612#10782#0" expanded="false" />
+            <element signature="e#10822#10906#0" expanded="false" />
+            <element signature="e#10947#11031#0" expanded="false" />
+            <element signature="e#11071#11153#0" expanded="false" />
           </folding>
         </state>
       </provider>

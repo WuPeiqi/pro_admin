@@ -71,28 +71,27 @@ class Page(object):
                     pager_end = self.current_page + self.half_pager_page_count
 
         page_list = []
-        query_params = self.query_params.copy()
 
         if self.current_page <= 1:
             prev = '<li><a href="#">上一页</a></li>'
         else:
-            query_params['page'] = self.current_page - 1
-            prev = '<a href="%s?%s">上一页</a>' % (self.base_url, urllib.parse.urlencode(query_params))
+            self.query_params['page'] = self.current_page - 1
+            prev = '<a href="%s?%s">上一页</a>' % (self.base_url,self.query_params.urlencode())
         page_list.append(prev)
         for i in range(pager_start, pager_end + 1):
-            query_params['page'] = i
+            self.query_params['page'] = i
             if self.current_page == i:
                 tpl = '<li class="active"><a href="%s?%s">%s</a></li>' % (
-                    self.base_url, urllib.parse.urlencode(query_params), i,)
+                    self.base_url, self.query_params.urlencode(), i,)
             else:
-                tpl = '<li><a href="%s?%s">%s</a></li>' % (self.base_url, urllib.parse.urlencode(query_params), i,)
+                tpl = '<li><a href="%s?%s">%s</a></li>' % (self.base_url, self.query_params.urlencode(), i,)
             page_list.append(tpl)
 
         if self.current_page >= self.pager_count:
             nex = '<li><a href="#">下一页</a></li>'
         else:
-            query_params['page'] = self.current_page + 1
-            nex = '<li><a href="%s?%s">下一页</a></li>' % (self.base_url, urllib.parse.urlencode(query_params),)
+            self.query_params['page'] = self.current_page + 1
+            nex = '<li><a href="%s?%s">下一页</a></li>' % (self.base_url, self.query_params.urlencode(),)
         page_list.append(nex)
         page_str = "".join(page_list)
         return page_str

@@ -9,13 +9,15 @@
         <form method="post" class="form-horizontal">
             {% csrf_token %}
             <div class="row" style="padding: 5px 0">
+                <!-- 定制Action -->
                 {% if cl.actions %}
                     {% show_action cl %}
                 {% endif %}
+                <!-- 添加按钮 -->
                 {{ cl.add_btn|safe }}
             </div>
             <div class="row">
-                <!-- 根据list_display和result_list显示数据 -->
+                <!-- 数据表格 -->
                 {% show_result_list cl %}
                 <div style="text-align: right">
                     <ul class="pagination" style="margin: 0;">
