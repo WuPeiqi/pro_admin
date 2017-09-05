@@ -6,6 +6,15 @@ from django.template.response import TemplateResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import six
+from django.utils.safestring import mark_safe
+
+
+class ChangeList(object):
+    def __init__(self, arya_modal, list_display, result_list, model_cls):
+        self.list_display = list_display
+        self.result_list = result_list
+        self.model_cls = model_cls
+        self.arya_modal = arya_modal
 
 
 class BaseAryaModal(object):
@@ -52,12 +61,11 @@ class BaseAryaModal(object):
 
     # ########## CURD功能 ##########
 
-    # 定制列表页面模板
+    """1. 定制显示列表的Html模板"""
     change_list_template = []
 
-    # 列表页面中默认的筛选条件
+    """2. 定制列表中的筛选条件"""
     change_list_condition = {}
-
 
     def get_model_field_name_list(self):
         """
@@ -73,33 +81,69 @@ class BaseAryaModal(object):
         # 获取当前model中定义的字段（包括反向查找字段）
         :return: 
         """
-        return [ item.name for item in self.model_class._meta._get_fields()]
-
+        return [item.name for item in self.model_class._meta._get_fields()]
 
     def get_change_list_condition(self):
+
         field_list = self.get_all_model_field_name_list()
         condition = {}
         for k in self.change_list_condition:
             if k not in field_list:
-                break
+                raise Exception('条件查询字段%s不合法，合法字段为：%s' % (k, ",".join(field_list)))
             condition[k + "__in"] = self.change_list_condition.getlist(k)
         return condition
 
+    """3. 定制数据列表开始"""
+    def checkbox_field(self, obj=None, is_header=False):
+        if is_header:
+            tpl = "<input type='checkbox' id='headCheckBox' />"
+            return mark_safe(tpl)
+        else:
+            tpl = "<input type='checkbox' value='{0}' />".format(obj.pk)
+            return mark_safe(tpl)
+
+    def custom_field(self, obj=None, is_header=False):
+        if is_header:
+            return '自定义列名称'
+        else:
+            return obj.username
+
+    def edit_field(self, obj=None, is_header=False):
+        if is_header:
+            return '操作'
+        else:
+            edit_url = reverse('{0}:{1}_{2}_change'.format(self.site.namespace, self.app_label, self.model_name),
+                               args=(obj.pk,))
+            tpl = "<a href='{0}'>编辑</a>".format(edit_url)
+            print(tpl)
+            return mark_safe(tpl)
+
+    # 页面上显示的字段
+    list_display = (checkbox_field, 'username', 'pwd', 'fk', custom_field, edit_field)
+
+    """增删改查方法"""
     def changelist_view(self, request):
         """
         显示数据列表
+        1. 数据列表
+        2. 筛选
+        3. 分页
+        4. 是否可编辑
+        5. 搜索
+        6. 定制行为
         :param request: 
         :return: 
         """
-        self.change_list_condition = request.GET
 
+        self.change_list_condition = request.GET
 
         result_list = self.model_class.objects.filter(**self.get_change_list_condition())
 
+        change_list = ChangeList(self, self.list_display, result_list, self.model_class)
         context = {
-            'result_list': result_list
-        }
+            'cl': change_list,
 
+        }
         return TemplateResponse(request, self.change_list_template or [
             'arya/%s/%s/change_list.html' % (self.app_label, self.model_name),
             'arya/%s/change_list.html' % self.app_label,

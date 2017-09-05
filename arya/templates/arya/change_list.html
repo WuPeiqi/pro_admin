@@ -1,10 +1,26 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    <h1>数据列表</h1>
-</body>
-</html>
+{% extends 'arya/layout.html' %}
+{% load arya_list %}
+
+
+{% block content %}
+    <div class="container">
+        <div class="row">
+            <h1>数据列表</h1>
+            <!-- 根据list_display和result_list显示数据 -->
+            {% show_result_list cl %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block js %}
+    <script>
+        $(function () {
+            $('#headCheckBox').click(function () {
+                $(this).parent().parent().parent().next().find(':checkbox').prop('checked',$(this).prop('checked'));
+            })
+
+        })
+
+
+    </script>
+{% endblock %}

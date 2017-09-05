@@ -4,13 +4,13 @@
 <head>
     <meta charset="UTF-8">
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{% static 'backend/plugins/bootstrap-3.3.7-dist/css/bootstrap.css'%}" />
+    <link rel="stylesheet" href="{% static 'arya/plugins/bootstrap-3.3.7-dist/css/bootstrap.css'%}" />
 </head>
 <body>
-    <h1>头部</h1>
     {% block content %} {% endblock %}
 
-    <script src="{% static 'backend/js/jquery-1.12.4.js' %}"></script>
-    <script src="{% static 'backend/plugins/bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
+    <script src="{% static 'arya/js/jquery-1.12.4.js' %}"></script>
+    <script src="{% static 'arya/plugins/bootstrap-3.3.7-dist/js/bootstrap.js' %}"></script>
+    {% block js %} {% endblock %}
 </body>
 </html>
