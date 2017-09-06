@@ -76,7 +76,7 @@ class Page(object):
             prev = '<li><a href="#">上一页</a></li>'
         else:
             self.query_params['page'] = self.current_page - 1
-            prev = '<a href="%s?%s">上一页</a>' % (self.base_url,self.query_params.urlencode())
+            prev = '<li><a href="%s?%s">上一页</a></li>' % (self.base_url,self.query_params.urlencode())
         page_list.append(prev)
         for i in range(pager_start, pager_end + 1):
             self.query_params['page'] = i

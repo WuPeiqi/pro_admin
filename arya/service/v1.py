@@ -3,11 +3,9 @@
 import copy
 import json
 import urllib.parse
-from django.shortcuts import render
 from django.template.response import TemplateResponse, SimpleTemplateResponse
 from django.shortcuts import redirect
 from django.urls import reverse
-from django.utils import six
 from django.utils.safestring import mark_safe
 from django.http.request import QueryDict
 from django.forms import Form, ModelForm
@@ -119,6 +117,7 @@ class BaseAryaModal(object):
             url(r'^add/$', self.add_view, name='%s_%s_add' % info),
             url(r'^(.+)/delete/$', self.delete_view, name='%s_%s_delete' % info),
             url(r'^(.+)/change/$', self.change_view, name='%s_%s_change' % info),
+            url(r'^(.+)/detail/$', self.detail_view, name='%s_%s_detail' % info),
             # For backwards compatibility (was the change url before 1.9)
             # url(r'^(.+)/$', RedirectView.as_view(pattern_name='%s:%s_%s_change' % ((self.backend_site.name,) + info))),
         ]
@@ -133,6 +132,9 @@ class BaseAryaModal(object):
 
     """1. 定制显示列表的Html模板"""
     change_list_template = []
+    add_form_template = []
+    detail_template = []
+    change_form_template = []
 
     """2. 定制列表中的筛选条件"""
 
@@ -142,8 +144,11 @@ class BaseAryaModal(object):
         :return: 
         """
         # print(type(self.model_class._meta))
-        # from django.db.models.options import Options
+        from django.db.models.options import Options
         return [item.name for item in self.model_class._meta.fields]
+
+    def get_model_field_name_list_m2m(self):
+        return [item.name for item in self.model_class._meta.many_to_many]
 
     def get_all_model_field_name_list(self):
         """
@@ -264,7 +269,7 @@ class BaseAryaModal(object):
         context = {
             'form': form
         }
-        return TemplateResponse(request, self.change_list_template or [
+        return TemplateResponse(request, self.add_form_template or [
             'arya/%s/%s/add.html' % (self.app_label, self.model_name),
             'arya/%s/add.html' % self.app_label,
             'arya/add.html'
@@ -277,8 +282,13 @@ class BaseAryaModal(object):
         :param pk: 
         :return: 
         """
-        # 获取列表URL + 获取之前的保存筛选条件
-        return redirect(self.changelist_param_url(request.GET))
+        self.model_class.objects.filter(pk=pk).delete()
+        _change_filter = request.GET.get('_change_filter')
+        if _change_filter:
+            change_list_url = "{0}?{1}".format(self.changelist_url(), _change_filter)
+        else:
+            change_list_url = self.changelist_url()
+        return redirect(change_list_url)
 
     def change_view(self, request, pk):
         """
@@ -307,10 +317,29 @@ class BaseAryaModal(object):
         context = {
             'form': form
         }
-        return TemplateResponse(request, self.change_list_template or [
+        return TemplateResponse(request, self.change_form_template or [
             'arya/%s/%s/change.html' % (self.app_label, self.model_name),
             'arya/%s/change.html' % self.app_label,
             'arya/change.html'
+        ], context)
+
+    def detail_view(self, request, pk):
+        row = self.model_class.objects.filter(pk=pk).first()
+        fields = self.get_model_form_cls.Meta.fields
+        if fields == '__all__':
+            fields = self.get_model_field_name_list()
+            print(self.get_model_field_name_list_m2m())
+        for name in fields:
+            val = getattr(row,name)
+            print(name,val)
+
+        context = {
+            'row': row
+        }
+        return TemplateResponse(request, self.change_form_template or [
+            'arya/%s/%s/detail.html' % (self.app_label, self.model_name),
+            'arya/%s/detail.html' % self.app_label,
+            'arya/detail.html'
         ], context)
 
 
