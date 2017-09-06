@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <title>{{ title }}</title>
     <link rel="stylesheet" href="{% static 'arya/plugins/bootstrap-3.3.7-dist/css/bootstrap.css'%}" />
+    {% block css %}{% endblock %}
 </head>
 <body>
     {% block content %} {% endblock %}

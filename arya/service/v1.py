@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
+import copy
 import urllib.parse
 from django.shortcuts import render
 from django.template.response import TemplateResponse
@@ -12,10 +13,7 @@ from django.forms import Form, ModelForm
 from django.forms import fields
 from django.forms import widgets
 from django.db.models import ForeignKey
-
 from arya.utils.pagination import Page
-
-import copy
 
 
 def model_to_dict(instance, fields=None, exclude=None):
@@ -81,30 +79,30 @@ class ChangeList(object):
         return mark_safe(tpl)
 
 
-class PageForm(Form):
-    username = fields.CharField(
-        label='用户名',
-        label_suffix=':',
-        widget=widgets.TextInput(attrs={'class': 'form-control'})
-    )
-    pwd = fields.CharField(
-        label='密码',
-        label_suffix=':',
-        widget=widgets.TextInput(attrs={'class': 'form-control'})
-    )
-
-    fk_id = fields.ChoiceField(
-        label='用户组',
-        label_suffix=':',
-        choices=[],
-        widget=widgets.Select(attrs={'class': 'form-control'})
-    )
-
-    def __init__(self, *args, **kwargs):
-        super(PageForm, self).__init__(*args, **kwargs)
-        from app01 import models
-
-        self.fields['fk_id'].choices = models.UserGroup.objects.values_list('id', 't1')
+# class PageForm(Form):
+#     username = fields.CharField(
+#         label='用户名',
+#         label_suffix=':',
+#         widget=widgets.TextInput(attrs={'class': 'form-control'})
+#     )
+#     pwd = fields.CharField(
+#         label='密码',
+#         label_suffix=':',
+#         widget=widgets.TextInput(attrs={'class': 'form-control'})
+#     )
+#
+#     fk_id = fields.ChoiceField(
+#         label='用户组',
+#         label_suffix=':',
+#         choices=[],
+#         widget=widgets.Select(attrs={'class': 'form-control'})
+#     )
+#
+#     def __init__(self, *args, **kwargs):
+#         super(PageForm, self).__init__(*args, **kwargs)
+#         from app01 import models
+#
+#         self.fields['fk_id'].choices = models.UserGroup.objects.values_list('id', 't1')
 
 
 class BaseAryaModal(object):
@@ -238,7 +236,15 @@ class BaseAryaModal(object):
     actions = [delete_action, ]
 
     """5. 定制添加和编辑页面中的Form组件"""
-    page_form = PageForm
+    page_model_form = None
+
+    @property
+    def get_model_form_cls(self):
+        model_form_cls = self.page_model_form
+        if not model_form_cls:
+            _meta = type('Meta', (object,), {'model': self.model_class, "fields": "__all__"})
+            model_form_cls = type('DynamicModelForm', (ModelForm,), {'Meta': _meta})
+        return model_form_cls
 
     """增删改查方法"""
 
@@ -286,10 +292,9 @@ class BaseAryaModal(object):
         """
 
         if request.method == 'GET':
-            # 创建Form表单
-            form = self.page_form()
+            form = self.get_model_form_cls()
         elif request.method == "POST":
-            form = self.page_form(data=request.POST, files=request.FILES)
+            form = self.get_model_form_cls(data=request.POST, files=request.FILES)
             if form.is_valid():
                 print(form.cleaned_data)
                 self.model_class.objects.create(**form.cleaned_data)
@@ -329,9 +334,9 @@ class BaseAryaModal(object):
         """
         if request.method == 'GET':
             obj = self.model_class.objects.filter(pk=pk).first()
-            form = self.page_form(initial=model_to_dict(obj))
+            form = self.get_model_form_cls(instance=obj)
         elif request.method == 'POST':
-            form = self.page_form(data=request.POST, files=request.FILES)
+            form = self.get_model_form_cls(data=request.POST, files=request.FILES)
             if form.is_valid():
                 self.model_class.objects.filter(pk=pk).update(**form.cleaned_data)
                 # 如果修改成功，则跳转回去原来筛选页面

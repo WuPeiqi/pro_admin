@@ -1,4 +1,10 @@
 {% extends 'arya/layout.html' %}
+{% load static %}
+
+{% block css %}
+    <link rel="stylesheet" href="{% static 'arya/css/form-control.css' %}" />
+{% endblock %}
+
 {% block content %}
     <div class="container">
         <h1>添加数据</h1>
@@ -8,9 +14,9 @@
                 <div class="form-group col-sm-6">
                     <label class="col-sm-3 control-label">
                         {% if item.field.label %}
-                            {{ item.field.label }}{{ item.field.label_suffix }}
+                            {{ item.field.label }}
                         {% else %}
-                            {{ item.name }}{{ item.field.label_suffix }}
+                            {{ item.name }}
                         {% endif %}
 
                     </label>
