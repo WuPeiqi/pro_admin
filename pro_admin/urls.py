@@ -17,10 +17,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 # from backend.service import v1
 from arya.service import v1
-
+from app01 import views
 urlpatterns = [
     # url(r'^admin/', admin.site.urls),
     # url(r'^backend/', v1.site.urls),
 
     url(r'^arya/', v1.site.urls),
+    url(r'^test/', views.test),
 ]

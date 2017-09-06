@@ -1,0 +1,42 @@
+<form class="form-horizontal" method="POST" novalidate>
+    {% csrf_token %}
+    {% for col in form %}
+        <div class="form-group col-sm-6">
+            <label class="col-sm-3 control-label">
+                {% if col.item.field.label %}
+                    {{ col.item.field.label }}
+                {% else %}
+                    {{ col.item.name }}
+                {% endif %}
+
+            </label>
+            <div class="col-sm-9" style="position: relative">
+                {{ col.item }}
+                {% if col.popup %}
+                    <div style="position: absolute;right: -5px;top: 8px;z-index: 9999;"><a
+                            href="javascript:openPopup('{{ col.popup_url }}');"
+                            class="glyphicon glyphicon-search"></a></div>
+                {% endif %}
+                {{ item.errors.0 }}
+            </div>
+        </div>
+    {% endfor %}
+    <div class="form-group">
+        <div class="col-sm-offset-10 col-sm-2">
+            <input type="submit" class="btn btn-primary" value="确认添加"/>
+        </div>
+    </div>
+</form>
+<script>
+    function popupCallback(response) {
+        var tag = document.createElement('option');
+        tag.value = response.pk;
+        tag.innerHTML = response.value;
+        tag.setAttribute('selected','selected');
+        document.getElementById(response.popup_id).appendChild(tag);
+
+    }
+    function openPopup(url) {
+        var popupPage = window.open(url, "xxxxxx", "status=1, height:500, width:600, toolbar=0, resizeable=0");
+    }
+</script>

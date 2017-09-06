@@ -1,37 +1,16 @@
 {% extends 'arya/layout.html' %}
 {% load static %}
+{% load arya_form %}
 
 
 {% block css %}
-    <link rel="stylesheet" href="{% static 'arya/css/form-control.css' %}" />
+    <link rel="stylesheet" href="{% static 'arya/css/form-control.css' %}"/>
 {% endblock %}
 
 {% block content %}
     <div class="container">
         {{ formf.username }}
         <h1>修改数据</h1>
-        <form class="form-horizontal" method="POST" novalidate>
-            {% csrf_token %}
-            {% for item in form %}
-                <div class="form-group col-sm-6">
-                    <label class="col-sm-3 control-label">
-                        {% if item.field.label %}
-                            {{ item.field.label }}
-                        {% else %}
-                            {{ item.name }}
-                        {% endif %}
-
-                    </label>
-                    <div class="col-sm-9">
-                        {{ item }}{{ item.errors.0 }}
-                    </div>
-                </div>
-            {% endfor %}
-            <div class="form-group">
-                <div class="col-sm-offset-10 col-sm-2">
-                    <input type="submit" class="btn btn-primary" value="确认修改"/>
-                </div>
-            </div>
-        </form>
+        {% show_form form %}
     </div>
 {% endblock %}

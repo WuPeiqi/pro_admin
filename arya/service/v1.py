@@ -1,9 +1,10 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 import copy
+import json
 import urllib.parse
 from django.shortcuts import render
-from django.template.response import TemplateResponse
+from django.template.response import TemplateResponse, SimpleTemplateResponse
 from django.shortcuts import redirect
 from django.urls import reverse
 from django.utils import six
@@ -74,35 +75,10 @@ class ChangeList(object):
         _change = QueryDict(mutable=True)
         _change['_change_filter'] = self.request.GET.urlencode()
 
-        tpl = "<a class='btn btn-success' style='float:right' href='{0}?{1}'>新建数据</a>".format(add_url,
-                                                                                              _change.urlencode())
+        tpl = "<a class='btn btn-success' style='float:right' href='{0}?{1}'><span class='glyphicon glyphicon-share-alt' aria-hidden='true'></span> 新建数据</a>".format(
+            add_url,
+            _change.urlencode())
         return mark_safe(tpl)
-
-
-# class PageForm(Form):
-#     username = fields.CharField(
-#         label='用户名',
-#         label_suffix=':',
-#         widget=widgets.TextInput(attrs={'class': 'form-control'})
-#     )
-#     pwd = fields.CharField(
-#         label='密码',
-#         label_suffix=':',
-#         widget=widgets.TextInput(attrs={'class': 'form-control'})
-#     )
-#
-#     fk_id = fields.ChoiceField(
-#         label='用户组',
-#         label_suffix=':',
-#         choices=[],
-#         widget=widgets.Select(attrs={'class': 'form-control'})
-#     )
-#
-#     def __init__(self, *args, **kwargs):
-#         super(PageForm, self).__init__(*args, **kwargs)
-#         from app01 import models
-#
-#         self.fields['fk_id'].choices = models.UserGroup.objects.values_list('id', 't1')
 
 
 class BaseAryaModal(object):
@@ -189,34 +165,7 @@ class BaseAryaModal(object):
 
     """3. 定制数据列表开始"""
 
-    def checkbox_field(self, obj=None, is_header=False):
-        if is_header:
-            tpl = "<input type='checkbox' id='headCheckBox' />"
-            return mark_safe(tpl)
-        else:
-            tpl = "<input type='checkbox' name='pk' value='{0}' />".format(obj.pk)
-            return mark_safe(tpl)
-
-    def custom_field(self, obj=None, is_header=False):
-        if is_header:
-            return '自定义列名称'
-        else:
-            return obj.username
-
-    def edit_field(self, obj=None, is_header=False):
-        if is_header:
-            return '操作'
-        else:
-
-            edit_url = reverse('{0}:{1}_{2}_change'.format(self.site.namespace, self.app_label, self.model_name),
-                               args=(obj.pk,))
-            _change = QueryDict(mutable=True)
-            _change['_change_filter'] = self.request.GET.urlencode()
-            tpl = "<a href='{0}?{1}'>编辑</a>".format(edit_url, _change.urlencode())
-            return mark_safe(tpl)
-
-    # 页面上显示的字段
-    list_display = (checkbox_field, 'username', 'pwd', 'fk', custom_field, edit_field)
+    list_display = "__str__"
 
     """4. 定制Action行为"""
 
@@ -293,17 +242,23 @@ class BaseAryaModal(object):
 
         if request.method == 'GET':
             form = self.get_model_form_cls()
+
         elif request.method == "POST":
             form = self.get_model_form_cls(data=request.POST, files=request.FILES)
             if form.is_valid():
-                print(form.cleaned_data)
-                self.model_class.objects.create(**form.cleaned_data)
-                _change_filter = request.GET.get('_change_filter')
-                if _change_filter:
-                    change_list_url = "{0}?{1}".format(self.changelist_url(), _change_filter)
+                obj = form.save()
+                popup_id = request.GET.get("_popup")
+                if popup_id:
+                    context = {'pk': obj.pk, 'value': str(obj), 'popup_id': popup_id}
+                    return SimpleTemplateResponse('arya/popup_response.html',
+                                                  {"popup_response_data": json.dumps(context)})
                 else:
-                    change_list_url = self.changelist_url()
-                return redirect(change_list_url)
+                    _change_filter = request.GET.get('_change_filter')
+                    if _change_filter:
+                        change_list_url = "{0}?{1}".format(self.changelist_url(), _change_filter)
+                    else:
+                        change_list_url = self.changelist_url()
+                    return redirect(change_list_url)
         else:
             raise Exception('当前URL只支持GET/POST方法')
         context = {
@@ -332,13 +287,13 @@ class BaseAryaModal(object):
         :param pk: 
         :return: 
         """
+        obj = self.model_class.objects.filter(pk=pk).first()
         if request.method == 'GET':
-            obj = self.model_class.objects.filter(pk=pk).first()
             form = self.get_model_form_cls(instance=obj)
         elif request.method == 'POST':
-            form = self.get_model_form_cls(data=request.POST, files=request.FILES)
+            form = self.get_model_form_cls(data=request.POST, files=request.FILES, instance=obj)
             if form.is_valid():
-                self.model_class.objects.filter(pk=pk).update(**form.cleaned_data)
+                form.save()
                 # 如果修改成功，则跳转回去原来筛选页面
                 _change_filter = request.GET.get('_change_filter')
                 if _change_filter:

@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html>
+<head><title>'Popup closing...'</title></head>
+<body>
+<script>
+    (function () {
+        var initData = {{ popup_response_data|safe }};
+        opener.popupCallback(initData);
+        window.close();
+    })()
+</script>
+</body>
+</html>
