@@ -8,12 +8,44 @@ from django.urls import reverse
 from django.utils import six
 from django.utils.safestring import mark_safe
 from django.http.request import QueryDict
-from django.forms import Form
+from django.forms import Form, ModelForm
 from django.forms import fields
 from django.forms import widgets
+from django.db.models import ForeignKey
+
 from arya.utils.pagination import Page
 
 import copy
+
+
+def model_to_dict(instance, fields=None, exclude=None):
+    from itertools import chain
+    """
+    Returns a dict containing the data in ``instance`` suitable for passing as
+    a Form's ``initial`` keyword argument.
+
+    ``fields`` is an optional list of field names. If provided, only the named
+    fields will be included in the returned dict.
+
+    ``exclude`` is an optional list of field names. If provided, the named
+    fields will be excluded from the returned dict, even if they are listed in
+    the ``fields`` argument.
+    """
+    opts = instance._meta
+    data = {}
+    for f in chain(opts.concrete_fields, opts.private_fields, opts.many_to_many):
+        print(f, type(f))
+        if not getattr(f, 'editable', False):
+            continue
+        if fields and f.name not in fields:
+            continue
+        if exclude and f.name in exclude:
+            continue
+        if type(f) == ForeignKey:
+            data[f.name + "_id"] = f.value_from_object(instance)
+        else:
+            data[f.name] = f.value_from_object(instance)
+    return data
 
 
 class ChangeList(object):
@@ -50,7 +82,7 @@ class ChangeList(object):
 
 
 class PageForm(Form):
-    user = fields.CharField(
+    username = fields.CharField(
         label='用户名',
         label_suffix=':',
         widget=widgets.TextInput(attrs={'class': 'form-control'})
@@ -60,11 +92,19 @@ class PageForm(Form):
         label_suffix=':',
         widget=widgets.TextInput(attrs={'class': 'form-control'})
     )
-    email = fields.EmailField(
-        label='邮箱',
+
+    fk_id = fields.ChoiceField(
+        label='用户组',
         label_suffix=':',
-        widget=widgets.TextInput(attrs={'class': 'form-control'})
+        choices=[],
+        widget=widgets.Select(attrs={'class': 'form-control'})
     )
+
+    def __init__(self, *args, **kwargs):
+        super(PageForm, self).__init__(*args, **kwargs)
+        from app01 import models
+
+        self.fields['fk_id'].choices = models.UserGroup.objects.values_list('id', 't1')
 
 
 class BaseAryaModal(object):
@@ -74,6 +114,8 @@ class BaseAryaModal(object):
         self.model_name = model_class._meta.model_name
 
         self.site = site
+
+        self.request = None
 
     def changelist_param_url(self, query_params):
         # redirect_url = "%s?%s" % (reverse('%s:%s_%s' % (self.site.namespace, self.app_label, self.model_name)),
@@ -167,9 +209,12 @@ class BaseAryaModal(object):
         if is_header:
             return '操作'
         else:
+
             edit_url = reverse('{0}:{1}_{2}_change'.format(self.site.namespace, self.app_label, self.model_name),
                                args=(obj.pk,))
-            tpl = "<a href='{0}'>编辑</a>".format(edit_url)
+            _change = QueryDict(mutable=True)
+            _change['_change_filter'] = self.request.GET.urlencode()
+            tpl = "<a href='{0}?{1}'>编辑</a>".format(edit_url, _change.urlencode())
             return mark_safe(tpl)
 
     # 页面上显示的字段
@@ -209,7 +254,7 @@ class BaseAryaModal(object):
         :param request: 
         :return: 
         """
-
+        self.request = request
         result_list = self.model_class.objects.filter(**self.get_change_list_condition(request.GET))
 
         if request.method == "POST":
@@ -239,24 +284,23 @@ class BaseAryaModal(object):
         :param request: 
         :return: 
         """
-        from django.forms.boundfield import BoundField
-        print(request.GET)
+
         if request.method == 'GET':
             # 创建Form表单
             form = self.page_form()
-        else:
+        elif request.method == "POST":
             form = self.page_form(data=request.POST, files=request.FILES)
             if form.is_valid():
                 print(form.cleaned_data)
-                # self.model_class.objects.create(**form.cleaned_data)
+                self.model_class.objects.create(**form.cleaned_data)
                 _change_filter = request.GET.get('_change_filter')
                 if _change_filter:
                     change_list_url = "{0}?{1}".format(self.changelist_url(), _change_filter)
                 else:
                     change_list_url = self.changelist_url()
                 return redirect(change_list_url)
-            else:
-                print(form.errors)
+        else:
+            raise Exception('当前URL只支持GET/POST方法')
         context = {
             'form': form
         }
@@ -284,18 +328,30 @@ class BaseAryaModal(object):
         :return: 
         """
         if request.method == 'GET':
-            return TemplateResponse(request, self.change_list_template or [
-                'arya/%s/%s/change.html' % (self.app_label, self.model_name),
-                'arya/%s/change.html' % self.app_label,
-                'arya/change.html'
-            ])
+            obj = self.model_class.objects.filter(pk=pk).first()
+            form = self.page_form(initial=model_to_dict(obj))
         elif request.method == 'POST':
-
-            # 如果修改成功，则跳转回去原来筛选页面
-            return redirect(self.changelist_url())
-
+            form = self.page_form(data=request.POST, files=request.FILES)
+            if form.is_valid():
+                self.model_class.objects.filter(pk=pk).update(**form.cleaned_data)
+                # 如果修改成功，则跳转回去原来筛选页面
+                _change_filter = request.GET.get('_change_filter')
+                if _change_filter:
+                    change_list_url = "{0}?{1}".format(self.changelist_url(), _change_filter)
+                else:
+                    change_list_url = self.changelist_url()
+                return redirect(change_list_url)
         else:
             raise Exception('当前URL只支持GET/POST方法')
+
+        context = {
+            'form': form
+        }
+        return TemplateResponse(request, self.change_list_template or [
+            'arya/%s/%s/change.html' % (self.app_label, self.model_name),
+            'arya/%s/change.html' % self.app_label,
+            'arya/change.html'
+        ], context)
 
 
 class AryaSite(object):
