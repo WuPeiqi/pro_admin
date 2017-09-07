@@ -9,6 +9,11 @@ class UserGroup(models.Model):
 class Some(models.Model):
     name = models.CharField(max_length=32)
 
+    def arya_filter_mm_text(self):
+        return self.name
+
+    def arya_filter_mm_value(self):
+        return self.pk
 
 class UserInfo(models.Model):
     username = models.CharField(verbose_name='用户名',max_length=32)
@@ -18,6 +23,12 @@ class UserInfo(models.Model):
     mm = models.ManyToManyField(verbose_name='选多个',to=Some)
 
     def __str__(self):
+        return self.username
+
+    def arya_filter_name_text(self):
+        return self.username
+
+    def arya_filter_name_value(self):
         return self.username
 
 class Test(models.Model):

@@ -23,5 +23,4 @@ urlpatterns = [
     # url(r'^backend/', v1.site.urls),
 
     url(r'^arya/', v1.site.urls),
-    url(r'^test/', views.test),
 ]

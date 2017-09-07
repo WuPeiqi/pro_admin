@@ -11,8 +11,11 @@ from django.http.request import QueryDict
 from django.forms import Form, ModelForm
 from django.forms import fields
 from django.forms import widgets
-from django.db.models import ForeignKey
+from django.db.models import ForeignKey, ManyToManyField
 from arya.utils.pagination import Page
+from types import FunctionType
+
+from django.http.request import QueryDict
 
 
 def model_to_dict(instance, fields=None, exclude=None):
@@ -45,10 +48,93 @@ def model_to_dict(instance, fields=None, exclude=None):
     return data
 
 
+class FilterList(object):
+    """
+    组合搜索项
+    """
+
+    def __init__(self, option, change_list, data_list, param_dict=None):
+        self.option = option
+
+        self.data_list = data_list
+
+        self.param_dict = copy.deepcopy(param_dict)
+
+        self.param_dict._mutable = True
+
+        self.change_list = change_list
+
+    def __iter__(self):
+
+        base_url = self.change_list.arya_modal.changelist_url()
+        tpl = "<a href='{0}' class='{1}'>{2}</a>"
+        # 全部
+        if self.option.name in self.param_dict:
+            pop_value = self.param_dict.pop(self.option.name)
+            url = "{0}?{1}".format(base_url, self.param_dict.urlencode())
+            val = tpl.format(url, '', '全部')
+            self.param_dict.setlist(self.option.name, pop_value)
+        else:
+            url = "{0}?{1}".format(base_url, self.param_dict.urlencode())
+            val = tpl.format(url, 'active', '全部')
+        yield mark_safe("<div class='whole'>")
+        yield mark_safe(val)
+        yield mark_safe("</div>")
+
+        yield mark_safe("<div class='others'>")
+        for obj in self.data_list:
+            param_dict = copy.deepcopy(self.param_dict)
+
+            pk = getattr(obj, self.option.val_func_name)() if self.option.val_func_name else obj.pk
+            pk = str(pk)
+
+            text = getattr(obj, self.option.text_func_name)() if self.option.text_func_name else str(obj)
+
+            exist = False
+            if pk in param_dict.getlist(self.option.name):
+                exist = True
+
+            if self.option.is_multi:
+                exist or param_dict.appendlist(self.option.name, pk)
+            else:
+                param_dict[self.option.name] = pk
+            url = "{0}?{1}".format(base_url, param_dict.urlencode())
+            val = tpl.format(url, 'active' if exist else '', text)
+            yield mark_safe(val)
+        yield mark_safe("</div>")
+
+
+class FilterOption(object):
+    def __init__(self, field_or_func, is_multi=False, text_func_name=None, val_func_name=None):
+        """
+        :param field: 字段名称或函数
+        :param is_multi: 是否支持多选
+        :param text_func_name: 在Model中定义函数，显示文本名称，默认使用 str(对象)
+        :param val_func_name:  在Model中定义函数，显示文本名称，默认使用 对象.pk
+        """
+        self.field_or_func = field_or_func
+        self.is_multi = is_multi
+        self.text_func_name = text_func_name
+        self.val_func_name = val_func_name
+
+    @property
+    def is_func(self):
+        if isinstance(self.field_or_func, FunctionType):
+            return True
+
+    @property
+    def name(self):
+        if self.is_func:
+            return self.field_or_func.__name__
+        else:
+            return self.field_or_func
+
+
 class ChangeList(object):
-    def __init__(self, request, arya_modal, list_display, result_list, model_cls, actions):
+    def __init__(self, request, arya_modal, list_display, result_list, model_cls, list_filter, actions):
         self.request = request
         self.list_display = list_display
+        self.list_filter = list_filter
 
         self.model_cls = model_cls
         self.arya_modal = arya_modal
@@ -77,6 +163,21 @@ class ChangeList(object):
             add_url,
             _change.urlencode())
         return mark_safe(tpl)
+
+    def gen_list_filter(self):
+
+        for option in self.list_filter:
+            if option.is_func:
+                data_list = option.field_or_func(self)
+            else:
+                _field = self.model_cls._meta.get_field(option.field_or_func)
+                if isinstance(_field, ForeignKey):
+                    data_list = FilterList(option, self, _field.rel.model.objects.all(), self.request.GET)
+                elif isinstance(_field, ManyToManyField):
+                    data_list = FilterList(option, self, _field.rel.model.objects.all(), self.request.GET)
+                else:
+                    data_list = FilterList(option, self, _field.model.objects.all(), self.request.GET)
+            yield data_list
 
 
 class BaseAryaModal(object):
@@ -200,6 +301,9 @@ class BaseAryaModal(object):
             model_form_cls = type('DynamicModelForm', (ModelForm,), {'Meta': _meta})
         return model_form_cls
 
+    """6. 定制查询组合条件"""
+    list_filter = []
+
     """增删改查方法"""
 
     def changelist_view(self, request):
@@ -227,7 +331,8 @@ class BaseAryaModal(object):
             else:
                 return redirect(self.changelist_url())
 
-        change_list = ChangeList(request, self, self.list_display, result_list, self.model_class, actions=self.actions)
+        change_list = ChangeList(request, self, self.list_display, result_list, self.model_class, self.list_filter,
+                                 actions=self.actions)
         context = {
             'cl': change_list,
 
@@ -324,14 +429,20 @@ class BaseAryaModal(object):
         ], context)
 
     def detail_view(self, request, pk):
+        """
+        查看详细
+        :param request: 
+        :param pk: 
+        :return: 
+        """
         row = self.model_class.objects.filter(pk=pk).first()
         fields = self.get_model_form_cls.Meta.fields
         if fields == '__all__':
             fields = self.get_model_field_name_list()
-            print(self.get_model_field_name_list_m2m())
+            # print(self.get_model_field_name_list_m2m())
         for name in fields:
-            val = getattr(row,name)
-            print(name,val)
+            val = getattr(row, name)
+            # print(name, val)
 
         context = {
             'row': row

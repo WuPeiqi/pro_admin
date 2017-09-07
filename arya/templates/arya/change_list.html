@@ -1,11 +1,61 @@
 {% extends 'arya/layout.html' %}
 {% load arya_list %}
 
+{% block css %}
+    <style>
+        .comb-search .row .whole{
+            width: 60px;
+            float: left;
+
+        }
+        .comb-search .row .others{
+            padding-left: 60px;
+        }
+
+        .comb-search .row a {
+            display: inline-block;
+            padding: 5px 8px;
+            margin: 3px;
+            border: 1px solid #d4d4d4;
+
+        }
+
+        .comb-search .row a {
+            display: inline-block;
+            padding: 5px 8px;
+            margin: 3px;
+            border: 1px solid #d4d4d4;
+        }
+
+        .comb-search a.active {
+            color: #fff;
+            background-color: #337ab7;
+            border-color: #2e6da4;
+        }
+    </style>
+{% endblock %}
+
 
 {% block content %}
 
     <div class="container">
         <h1>数据列表</h1>
+        {% if cl.list_filter %}
+            <div class="comb-search">
+                {% for row in cl.gen_list_filter %}
+                    <div class="row">
+                        {% for col in row %}
+                            {% if forloop.first %}
+                                {{ col }}
+                            {% else %}
+                                {{ col }}
+                            {% endif %}
+
+                        {% endfor %}
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
         <form method="post" class="form-horizontal">
             {% csrf_token %}
             <div class="row" style="padding: 5px 0">
