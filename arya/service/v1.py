@@ -95,7 +95,10 @@ class FilterList(object):
                 exist = True
 
             if self.option.is_multi:
-                exist or param_dict.appendlist(self.option.name, pk)
+                if exist:
+                    param_dict.getlist(self.option.name).remove(pk)
+                else:
+                    param_dict.appendlist(self.option.name, pk)
             else:
                 param_dict[self.option.name] = pk
             url = "{0}?{1}".format(base_url, param_dict.urlencode())

@@ -50,7 +50,7 @@ class UserModelAdmin(v1.BaseAryaModal):
 
     list_filter = [
         v1.FilterOption('username', False,text_func_name="arya_filter_name_text", val_func_name="arya_filter_name_value"),
-        v1.FilterOption('fk', False),
+        v1.FilterOption('fk', True),
         v1.FilterOption('mm', False, text_func_name="arya_filter_mm_text", val_func_name="arya_filter_mm_value"),
     ]
     """
