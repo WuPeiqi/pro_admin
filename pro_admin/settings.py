@@ -15,7 +15,6 @@ import os
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.10/howto/deployment/checklist/
 
@@ -26,7 +25,6 @@ SECRET_KEY = 'nslu&9=v0*=vv^vvcu#-)b2!v2&0b$3%!1!1y)4yyvdhkb1*e4'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
 
 # Application definition
 INSTALLED_APPS = [
@@ -39,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app01',
 
+
 ]
 
 MIDDLEWARE = [
@@ -49,6 +48,7 @@ MIDDLEWARE = [
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'arya.middleware.rbac.RbacMiddleware',
 ]
 
 ROOT_URLCONF = 'pro_admin.urls'
@@ -71,7 +71,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'pro_admin.wsgi.application'
 
-
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
@@ -81,7 +80,6 @@ DATABASES = {
         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/1.10/ref/settings/#auth-password-validators
@@ -101,7 +99,6 @@ AUTH_PASSWORD_VALIDATORS = [
     # },
 ]
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/1.10/topics/i18n/
 
@@ -115,11 +112,34 @@ USE_L10N = True
 
 USE_TZ = True
 
-
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = (
-    os.path.join(BASE_DIR,'static'),
+    os.path.join(BASE_DIR, 'static'),
 )
+
+# ############################## RBAC权限相关配置开始 ##############################
+# session中保存权限信息的Key
+RBAC_PERMISSION_URL_SESSION_KEY = "rbac_permission_url_session_key"
+
+# Session中保存菜单和权限信息的Key
+RBAC_MENU_PERMISSION_SESSION_KEY = "rbac_menu_permission_session_key"
+RBAC_MENU_KEY = "rbac_menu_key"
+RBAC_MENU_PERMISSION_KEY = "rbac_menu_permission_key"
+
+# 匹配URL时指定规则
+RBAC_MATCH_PARTTERN = "^{0}$"
+
+# 无需权限控制的URL
+RBAC_NO_AUTH_URL = [
+    '/arya/login',
+]
+
+# 无权访问时，页面提示信息
+RBAC_PERMISSION_MSG = "无权限访问"
+
+# 菜单主题
+RBAC_THEME = "default"
+# ############################## RBAC权限相关配置结束 ##############################

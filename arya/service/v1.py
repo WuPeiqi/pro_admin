@@ -4,7 +4,7 @@ import copy
 import json
 import urllib.parse
 from django.template.response import TemplateResponse, SimpleTemplateResponse
-from django.shortcuts import redirect
+from django.shortcuts import redirect,render,HttpResponse
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.http.request import QueryDict
@@ -497,7 +497,26 @@ class AryaSite(object):
         :param request: 
         :return: 
         """
-        pass
+        from arya import models
+        from arya.service import rbac
+        obj = models.User.objects.get(id=1)
+        # 初始化权限信息
+        rbac.initial_permission(request, obj)
+
+        return HttpResponse('Login')
+
+        # if request.method == 'GET':
+        #     return render(request,'login.html')
+        # else:
+        #     from arya import models
+        #     from arya.service import rbac
+        #
+        #     user = request.POST.get('username')
+        #     pwd = request.POST.get('password')
+        #     obj = models.User.objects.filter(username=user,password=pwd).first()
+        #
+        #     rbac.initial_permission(request,obj)
+        #     return redirect('/')
 
     def logout(self, request):
         """
@@ -513,7 +532,7 @@ class AryaSite(object):
         :param request: 
         :return: 
         """
-        pass
+        return render(request,'index.html')
 
 
 site = AryaSite()

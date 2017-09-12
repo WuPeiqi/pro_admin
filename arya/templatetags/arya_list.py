@@ -50,7 +50,6 @@ def show_result_list(change_list):
     :param queryset: 
     :return: 
     """
-
     return {
         'result': result_body_list(change_list),
         'headers': result_header_list(change_list)

@@ -17,7 +17,7 @@
                             href="javascript:openPopup('{{ col.popup_url }}');"
                             class="glyphicon glyphicon-search"></a></div>
                 {% endif %}
-                {{ item.errors.0 }}
+                {{ col.item.errors.0 }}
             </div>
         </div>
     {% endfor %}
@@ -37,6 +37,6 @@
 
     }
     function openPopup(url) {
-        var popupPage = window.open(url, "xxxxxx", "status=1, height:500, width:600, toolbar=0, resizeable=0");
+        var popupPage = window.open(url, url, "status=1, height:500, width:600, toolbar=0, resizeable=0");
     }
 </script>

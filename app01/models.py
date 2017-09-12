@@ -20,7 +20,7 @@ class UserInfo(models.Model):
     pwd = models.CharField(verbose_name='密码',max_length=32)
     fk = models.ForeignKey(verbose_name='用户组',to=UserGroup,null=True)
 
-    mm = models.ManyToManyField(verbose_name='选多个',to=Some)
+    mm = models.ManyToManyField(verbose_name='选多个',to="Some")
 
     def __str__(self):
         return self.username

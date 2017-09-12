@@ -1,0 +1,26 @@
+{% load rbac %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        {% rbac_css %}
+    </style>
+</head>
+<body>
+<div style="width: 200px;float: left">
+    {% rbac_menu request %}
+</div>
+<div style="float: left">
+    欢迎登录
+</div>
+<script src="{% static 'arya/js/jquery-1.12.4.js' %}"></script>
+<script>
+    $(function () {
+        {% rbac_js %}
+    });
+</script>
+</body>
+</html>
