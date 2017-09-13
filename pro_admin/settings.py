@@ -37,7 +37,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'app01',
 
-
 ]
 
 MIDDLEWARE = [
@@ -48,7 +47,7 @@ MIDDLEWARE = [
     # 'django.contrib.auth.middleware.AuthenticationMiddleware',
     # 'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'arya.middleware.rbac.RbacMiddleware',
+    #'arya.middleware.rbac.RbacMiddleware',
 ]
 
 ROOT_URLCONF = 'pro_admin.urls'

@@ -49,7 +49,8 @@ class UserModelAdmin(v1.BaseAryaModal):
     list_display = (checkbox_field, 'username', 'pwd', 'fk', custom_field, edit_field)
 
     list_filter = [
-        v1.FilterOption('username', True,text_func_name="arya_filter_name_text", val_func_name="arya_filter_name_value"),
+        v1.FilterOption('username', True, text_func_name="arya_filter_name_text",
+                        val_func_name="arya_filter_name_value"),
         v1.FilterOption('fk', True),
         v1.FilterOption('mm', False, text_func_name="arya_filter_mm_text", val_func_name="arya_filter_mm_value"),
     ]
@@ -120,6 +121,6 @@ class UserModelAdmin(v1.BaseAryaModal):
             
     """
 
+
 v1.site.register(models.UserInfo, UserModelAdmin)
 v1.site.register(models.UserGroup)
-# v1.site.register(models.Some)

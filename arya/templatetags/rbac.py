@@ -45,7 +45,6 @@ def process_menu_tree_data(request):
         all_menu_dict[menu_id]['child'].append(item)
 
         # 将当前URL和权限正则进行匹配，用于指示是否默认打开菜单
-        # print(item['url'],request.path_info,re.match(item['url'], request.path_info))
         pattern = settings.RBAC_MATCH_PARTTERN.format(item['url'])
         if re.match(pattern, request.path_info):
             item['opened'] = True

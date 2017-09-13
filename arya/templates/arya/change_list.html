@@ -1,8 +1,12 @@
 {% extends 'arya/layout.html' %}
 {% load arya_list %}
 
+
 {% block css %}
     <style>
+        .row{
+            margin: 5px 15px;
+        }
         .comb-search .row .whole{
             width: 60px;
             float: left;
@@ -38,7 +42,7 @@
 
 {% block content %}
 
-    <div class="container">
+    <div>
         <h1>数据列表</h1>
         {% if cl.list_filter %}
             <div class="comb-search">

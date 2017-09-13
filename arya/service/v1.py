@@ -4,7 +4,7 @@ import copy
 import json
 import urllib.parse
 from django.template.response import TemplateResponse, SimpleTemplateResponse
-from django.shortcuts import redirect,render,HttpResponse
+from django.shortcuts import redirect, render, HttpResponse
 from django.urls import reverse
 from django.utils.safestring import mark_safe
 from django.http.request import QueryDict
@@ -499,24 +499,27 @@ class AryaSite(object):
         """
         from arya import models
         from arya.service import rbac
-        obj = models.User.objects.get(id=1)
-        # 初始化权限信息
-        rbac.initial_permission(request, obj)
 
-        return HttpResponse('Login')
+        # 测试
+        # obj = models.User.objects.get(id=1)
+        # rbac.initial_permission(request, obj) # 初始化权限信息
+        #
+        # return HttpResponse('Login')
 
-        # if request.method == 'GET':
-        #     return render(request,'login.html')
-        # else:
-        #     from arya import models
-        #     from arya.service import rbac
-        #
-        #     user = request.POST.get('username')
-        #     pwd = request.POST.get('password')
-        #     obj = models.User.objects.filter(username=user,password=pwd).first()
-        #
-        #     rbac.initial_permission(request,obj)
-        #     return redirect('/')
+        if request.method == 'GET':
+            return render(request, 'login.html')
+        else:
+            from arya import models
+            from arya.service import rbac
+
+            user = request.POST.get('username')
+            pwd = request.POST.get('password')
+            obj = models.User.objects.filter(username=user, password=pwd).first()
+            if obj:
+                rbac.initial_permission(request, obj)
+                return redirect('/arya/')
+            else:
+                return render(request, 'login.html')
 
     def logout(self, request):
         """
@@ -532,7 +535,7 @@ class AryaSite(object):
         :param request: 
         :return: 
         """
-        return render(request,'index.html')
+        return render(request, 'arya/index.html')
 
 
 site = AryaSite()

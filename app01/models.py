@@ -9,6 +9,8 @@ class UserGroup(models.Model):
 class Some(models.Model):
     name = models.CharField(max_length=32)
 
+    def __str__(self):
+        return self.name
     def arya_filter_mm_text(self):
         return self.name
 
